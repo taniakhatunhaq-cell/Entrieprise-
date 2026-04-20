@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tania Enterprise</title>
+
+<style>
+body { margin:0; font-family:Arial; overflow:hidden; }
+
+/* SLIDER */
+.slider { display:flex; width:400%; transition:0.5s; }
+.slide {
+  width:100%; height:100vh; flex-shrink:0;
+  padding:20px; box-sizing:border-box; text-align:center;
+}
+
+/* COLORS */
+.slide1 { background:#222; color:white;}
+.slide2 { background:#f5f5f5;}
+.slide3 { background:#e8f0fe;}
+.slide4 { background:#111; color:white;}
+
+/* PRODUCTS */
+.products { display:flex; flex-wrap:wrap; justify-content:center; }
+.product {
+  background:white; margin:8px; padding:10px;
+  border-radius:10px; width:170px;
+}
+.product img { width:100%; border-radius:10px; }
+
+.price { color:green; font-weight:bold; }
+
+/* BUTTON */
+.btn {
+  display:block;
+  background:#25D366;
+  color:white;
+  padding:8px;
+  margin-top:5px;
+  text-decoration:none;
+  border-radius:5px;
+}
+
+/* POPUP */
+.popup {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+}
+.popup-box {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  width:80%;
+}
+
+/* STICKY */
+.sticky {
+  position:fixed;
+  bottom:10px;
+  right:10px;
+}
+.call { background:blue; }
+.whatsapp { background:green; }
+
+</style>
+</head>
+
+<body>
+
+<div class="slider" id="slider">
+
+<!-- SLIDE 1 -->
+<div class="slide slide1">
+<h1>Tania Enterprise</h1>
+<p>30+ Years Experience</p>
+<p>সিমেন্ট, রড, ইট, বালি সুলভ মূল্যে পাওয়া যায়</p>
+<p>📍 Memanpur Middey Para</p>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide slide2">
+<h2>আমাদের পণ্য</h2>
+<p>🚚 আমরা দ্রুত ডেলিভারি করি (পরের দিন)</p>
+
+<div class="products">
+
+<div class="product">
+<img src="https://i.ibb.co/S4NtRSB9/IMG-4770.jpg">
+<p>ইট</p>
+<p class="price">₹8</p>
+<a class="btn" onclick="openForm('Bricks')">Add to Cart</a>
+<a class="btn" href="https://wa.me/919123991412?text=আমি ইট অর্ডার করতে চাই">অর্ডার করুন</a>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/mVcFNTtZ/IMG-4771.jpg">
+<p>বালি</p>
+<p class="price">₹12</p>
+<a class="btn" onclick="openForm('Sand')">Add to Cart</a>
+<a class="btn" href="https://wa.me/919123991412?text=আমি বালি অর্ডার করতে চাই">অর্ডার করুন</a>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/99VmC9Jq/IMG-4772.jpg">
+<p>সিমেন্ট</p>
+<p class="price">₹350</p>
+<a class="btn" onclick="openForm('Cement')">Add to Cart</a>
+<a class="btn" href="https://wa.me/919123991412?text=আমি সিমেন্ট অর্ডার করতে চাই">অর্ডার করুন</a>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/4whxsw8p/IMG-4769.webp">
+<p>স্টোন চিপ</p>
+<p class="price">₹120</p>
+<a class="btn" onclick="openForm('Stone')">Add to Cart</a>
+<a class="btn" href="https://wa.me/919123991412?text=আমি স্টোন চিপ অর্ডার করতে চাই">অর্ডার করুন</a>
+</div>
+
+<div class="product">
+<img src="https://i.ibb.co/RGw6jWn7/IMG-4768.jpg">
+<p>রড</p>
+<p class="price">Running Price</p>
+<a class="btn" href="https://wa.me/919123991412?text=Rod price please">Check Price</a>
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 3 (BULK FORM) -->
+<div class="slide slide3">
+<h2>Bulk Order</h2>
+
+<input id="name" placeholder="নাম"><br>
+<input id="qty" placeholder="পরিমাণ"><br>
+
+<button class="btn" onclick="calculate()">Calculate</button>
+<h3 id="total"></h3>
+
+<button class="btn" onclick="sendOrder()">WhatsApp Order</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide slide4">
+<h2>Tania Builder</h2>
+
+<p>We are working with Maheshtala Municipality (Govt project)</p>
+<p>We supply bricks & construction work at best rates</p>
+
+<p>Sub Dealer of Dalmia</p>
+
+<img src="https://i.ibb.co/DPsPzyXW/IMG-2426.jpg" width="150"><br><br>
+
+<img src="https://i.ibb.co/RpyKs4mk/df761259-9589-44e0-a113-c3d9fd7760ca.jpg" width="120">
+<p>Ziyarul Haque Molla</p>
+
+<p>📞 9123991412</p>
+<p>Facebook: Ziyarul Haque Molla</p>
+
+</div>
+
+</div>
+
+<!-- POPUP FORM -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h3>Bulk Order</h3>
+<input id="pqty" placeholder="Quantity"><br>
+<button onclick="calculate()">Calculate</button>
+<h4 id="ptotal"></h4>
+<button onclick="sendOrder()">Order</button>
+</div>
+</div>
+
+<!-- STICKY -->
+<div class="sticky">
+<a class="btn call" href="tel:9123991412">📞</a>
+<a class="btn whatsapp" href="https://wa.me/919123991412">💬</a>
+</div>
+
+<script>
+
+let currentProduct = "";
+
+// OPEN FORM
+function openForm(p){
+  currentProduct = p;
+  popup.style.display="flex";
+}
+
+// CALCULATION
+function calculate(){
+  let qty = document.getElementById("qty").value || document.getElementById("pqty").value;
+
+  let price = 0;
+  if(currentProduct=="Bricks") price=8;
+  if(currentProduct=="Sand") price=12;
+  if(currentProduct=="Cement") price=350;
+  if(currentProduct=="Stone") price=120;
+
+  let carry = qty * 10;
+  let total = (price * qty) + carry;
+
+  total.innerText = "Total ₹ " + total;
+  ptotal.innerText = "Total ₹ " + total;
+}
+
+// WHATSAPP ORDER
+function sendOrder(){
+  let msg = `Product: ${currentProduct} Quantity: ${pqty.value}`;
+  window.open(`https://wa.me/919123991412?text=${msg}`);
+}
+
+// AUTO SLIDE
+let i=0;
+setInterval(()=>{
+  i=(i+1)%4;
+  slider.style.transform = "translateX("+(-i*100)+"%)";
+},4000);
+
+</script>
+
+</body>
+</html>
